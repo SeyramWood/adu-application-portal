@@ -2,8 +2,10 @@
 
 namespace App\Traits;
 
-use App\Models\Applicant;
 use App\Models\Review;
+use App\Models\Applicant;
+use App\Models\Subscriber;
+use App\Models\Subscribers;
 use Illuminate\Console\Application;
 
 /**
@@ -13,6 +15,7 @@ trait ApplicantTrait
 {
   public function countApplicants()
   {
+    return [];
     return [
       'total' => Applicant::count(),
       'inProgress' => Applicant::whereNotIn('status', ['completed'])->count(),
@@ -24,6 +27,7 @@ trait ApplicantTrait
 
   public function getApplicants($limit = null)
   {
+    return [];
     if ($limit) {
       return Applicant::select('id', 'first_name', 'last_name', 'email', 'desired_major')
         ->limit($limit)
@@ -34,6 +38,7 @@ trait ApplicantTrait
   }
   public function getReviewedApplicants($limit = null)
   {
+    return [];
     if ($limit) {
       return Review::join('applicants', 'applicants.id', '=', 'reviews.applicant_id')
         ->where('applicants.scholarship', '!=', '')
@@ -152,5 +157,14 @@ trait ApplicantTrait
         ->select('id', 'first_name', 'last_name', 'email', 'contact_number', 'desired_major')
         ->orderByDesc('id')->get();
     }
+  }
+
+  public function getSubscribers($limit = null)
+  {
+    if ($limit) {
+      return Subscriber::limit($limit)
+        ->orderByDesc('id')->get();
+    }
+    return Subscriber::all();
   }
 }

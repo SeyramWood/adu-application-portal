@@ -18,6 +18,7 @@ class DashboardController extends Controller
             'applicantCount' => fn () => $this->countApplicants(),
             'latestApplicants' => fn () => $this->getApplicants(3),
             'latestReviewedApplicants' => fn () => $this->getReviewedApplicants(3),
+            'subscribers' => fn () => $this->getSubscribers(3),
         ]);
     }
     public function applicants()
@@ -30,6 +31,12 @@ class DashboardController extends Controller
     {
         return inertia('Applicant/ReviewedApplicants', [
             'applicants' => fn () => $this->getReviewedApplicants(),
+        ]);
+    }
+    public function subscribers()
+    {
+        return inertia('Website/Subscribers', [
+            'subscribers' => fn () => $this->getSubscribers(),
         ]);
     }
 }

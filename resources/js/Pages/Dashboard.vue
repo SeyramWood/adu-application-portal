@@ -242,6 +242,68 @@
           </div>
         </section>
       </s-accordian>
+      <s-accordian label="Accordian">
+        <template #header>
+          <section class="collapse__header">
+            <div class="collapse__header__left">
+              <div class="icon-left">
+                <div class="icon-arch"></div>
+                <div class="icon-circle"></div>
+              </div>
+              <div class="title">
+                <h4>Recent Sbuscribers</h4>
+              </div>
+            </div>
+            <div class="collapse__header__right">
+              <!-- <div class="progress">
+                <v-progress-circular
+                  :value="65"
+                  color="primary"
+                  :size="70"
+                  :width="10"
+                >
+                  65%
+                </v-progress-circular>
+              </div> -->
+              <div class="fat__arrow">
+                <div class="arrow"></div>
+              </div>
+            </div>
+          </section>
+        </template>
+        <section class="collapse__content">
+          <div
+            class="collapse__content__timeline"
+            v-for="s in subscribers"
+            :key="s.id"
+          >
+            <div class="line"></div>
+            <div class="dot"></div>
+            <div class="title">
+              <span>{{ `${s.email}` }}</span>
+            </div>
+            <div class="user">
+              <div class="sperator"></div>
+              <div class="details">
+                <span>{{ s.created_at }}</span>
+              </div>
+            </div>
+          </div>
+          <div class="collapse__content__btn">
+            <Link
+              href="/dashboard/subscribers"
+              class="
+                v-btn v-btn--is-elevated v-btn--has-bg
+                theme--light
+                v-size--large
+                secondary
+              "
+            >
+              View Subscribers
+            </Link>
+          </div>
+        </section>
+      </s-accordian>
     </s-accordians>
   </section>
 </template>
@@ -267,6 +329,10 @@ export default {
       type: Array,
     },
     latestReviewedApplicants: {
+      require: true,
+      type: Array,
+    },
+    subscribers: {
       require: true,
       type: Array,
     },
