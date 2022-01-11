@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Applicant;
 use App\Models\Review;
+use App\Models\Applicant;
+use App\Models\Subscriber;
 use App\Models\Scholarship;
-use App\Traits\ApplicantTrait;
 use Illuminate\Http\Request;
+use App\Traits\ApplicantTrait;
 
 class DashboardController extends Controller
 {
@@ -38,5 +39,14 @@ class DashboardController extends Controller
         return inertia('Website/Subscribers', [
             'subscribers' => fn () => $this->getSubscribers(),
         ]);
+    }
+
+    public function subscribe(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|email:filter|unique:subscribers,email'
+        ]);
+        Subscriber::create($request->all());
+        return response()->json(['ok' => true]);
     }
 }

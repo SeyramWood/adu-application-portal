@@ -32,5 +32,6 @@ Route::prefix('dashboard')->group(function () {
 
   Route::get('/filter-applicants/{keys}', 'ApplicantController@filter');
 
+  Route::post('/subscribe-to-newsletter', 'DashboardController@subscribe');
   Route::get('/subscribers', 'DashboardController@subscribers')->name('subscribers');
 });
